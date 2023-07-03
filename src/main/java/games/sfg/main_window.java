@@ -204,6 +204,10 @@ public class main_window extends JFrame implements window {
     private void TfBtnActionPerformed(java.awt.event.ActionEvent evt) {
         String n1 = JOptionPane.showInputDialog("insert Input Node");
         String n2 = JOptionPane.showInputDialog("insert Output Node");
+        if(!(topG.getNodes().containsKey(n1)) || !(topG.getNodes().containsKey(n2)) ){
+            JOptionPane.showInternalMessageDialog(null, "Please insert nodes in the graph only");
+            return;
+        }
         double tf = topG.tf(topG.getNodes().get(n1), topG.getNodes().get(n2));
         JOptionPane.showInternalMessageDialog(null,"tf ="+ tf);
     } 

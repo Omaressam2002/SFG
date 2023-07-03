@@ -15,7 +15,7 @@ public class graphes {
     private boolean tf_state;    
     private ArrayList<ArrayList<edges>> paths;
     private ArrayList<Double> pgains;
-    private ArrayList<edges> list;
+    private ArrayList<edges> pathProspect;
     private double temp_gain;
     private ArrayList<ArrayList<edges>> loops;
     private ArrayList<edges> loopProspect; 
@@ -28,7 +28,7 @@ public class graphes {
     private void resetpaths(){
         paths = new ArrayList<ArrayList<edges>>();
         pgains = new ArrayList<Double>();
-        list = new ArrayList<edges>();
+        pathProspect = new ArrayList<edges>();
         temp_gain=1;
     }
     private void resetloops(){
@@ -53,26 +53,26 @@ public class graphes {
         ed.put(path, edge);
         edge.draw(g);
     }
-    private void getpath(node start,node end) {
-        for(edges e : getEdges().values()){
-         if (e.getStart().equals(start) && e.isDirection()){
-             if(e.getEnd().equals(end)){
-                 temp_gain *= e.getGain();
-                 list.add(e);
-                 pgains.add(temp_gain);
-                 paths.add(new ArrayList<edges>(list));
-                 }
-             else{
-               temp_gain *= e.getGain();
-               list.add(e);
-               getpath(e.getEnd(), end);
-                }
-             if(temp_gain>1){
-             temp_gain /= e.getGain();
-             list.remove(list.size()-1);
-             }
-     }
+    private void getPath(node start, node end){
+        checkPath(start, end);
+        for(ArrayList<edges> p: paths){
+            pgains.add(getGAIN(p));
+        }
     }
+    private void checkPath(node start,node end){
+        for(node n: start.getNeighbors()){
+            edges e = ed.get(start.getName()+","+n.getName());
+            if(e.isDirection()){
+                pathProspect.add(e);
+                if(n.equals(end)){
+                    paths.add(new ArrayList<edges>(pathProspect));
+                }
+                else{
+                    checkPath(n, end); 
+                }
+                pathProspect.remove(e);
+            }
+        }
     }
     private void getloops(){
         for(node n : nodes.values()){
@@ -91,14 +91,20 @@ public class graphes {
         removeDuplicateLoops();
     }
     private void removeDuplicateLoops(){
+        ArrayList<ArrayList<edges>> loopsToBeRemoved = new ArrayList<ArrayList<edges>>();
         for(int i=0; i<(loops.size()-1);i++){
             for(int j=i+1;j<loops.size();j++){
                 if(isADuplicate(loops.get(i),loops.get(j))){
-                    loops.remove(j);
+                    loopsToBeRemoved.add(loops.get(j));
                 }
             }
         
-        } 
+        }
+        for(ArrayList<edges> l : loopsToBeRemoved){
+            if(loops.contains(l)){
+                loops.remove(l);
+            }
+        }
     }
     private boolean isADuplicate(ArrayList<edges> l1,ArrayList<edges> l2){
         if(l1.size() == l2.size()){ // has to be of same size and has the same set of edges in any order
@@ -194,7 +200,7 @@ public class graphes {
     public double tf(node input, node output){
         resetpaths();
         resetloops();   
-        getpath(input, output);
+        getPath(input, output);
         getloops();
         double DELTA = 1 - sumOfAllLoopGains() + sumOfProductsOfNon_TouchingLoops();
         double[] DELTA_I = new double[paths.size()];

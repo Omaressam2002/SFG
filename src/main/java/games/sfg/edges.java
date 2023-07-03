@@ -20,25 +20,12 @@ public class edges {
         public Double getGain() {
             return gain;
         }
-
-        private void setGain(Double gain) {
-            this.gain = gain;
-        }
-
         public node getStart() {
             return start;
         }
 
-        private void setStart(node start) {
-            this.start = start;
-        }
-
         public node getEnd() {
             return end;
-        }
-
-        private void setEnd(node end) {
-            this.end = end;
         }
 
         public boolean isDirection() {
@@ -50,8 +37,8 @@ public class edges {
         public void draw(Graphics g){
             g.setColor(Color.BLACK);
             if(direction){
-            g.drawLine(start.getPoint().x+30, start.getPoint().y+25, end.getPoint().x+20, end.getPoint().y+25);
-            g.drawString(gain+ ">", start.getPoint().x+(((end.getPoint().x+20)-(start.getPoint().x+30))/2),start.getPoint().y+10);
+                g.drawLine(start.getPoint().x+30, start.getPoint().y+25, end.getPoint().x+20, end.getPoint().y+25);
+                g.drawString(gain+ ">", start.getPoint().x+(((end.getPoint().x+20)-(start.getPoint().x+30))/2),start.getPoint().y+10);
             }
             else if(!direction){
                g.drawArc(end.getPoint().x+25, end.getPoint().y+10,Math.abs(start.getPoint().x-end.getPoint().x),50 ,0, -180);

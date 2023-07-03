@@ -25,7 +25,7 @@ public class About_Window extends JFrame implements window{
 
         jDialog1 = new JDialog();
         text = new TextArea();
-        Dimension d  = new Dimension(700, 430);
+        Dimension d  = new Dimension(700, 490);
         setPreferredSize(d);
         setResizable(false);
         javax.swing.GroupLayout jDialog1Layout = new javax.swing.GroupLayout(jDialog1.getContentPane());
@@ -55,10 +55,11 @@ public class About_Window extends JFrame implements window{
         out.append("4- Analyze your Graph by printing the Loops and");
         out.append(" the paths of the Graph.\n\n");
         out.append("5- Reset Button in the Menu bar.\n\n");
-        out.append("PS: the Direction of the edge will be Determined by the position of the nodes.\n");
+        out.append("PS:\n\n**the Direction of the edge will be Determined by the position of the nodes.\n");
         out.append("So if start node came - coordinately - before the end node the edge will be\na forward branch,\n");
-        out.append("But if the end node came first the edge will be a feedback branch.\n");
-        
+        out.append("But if the end node came first the edge will be a feedback branch.\n\n");
+        out.append("** You can't have 2 branches between the same two nodes\n");
+        out.append("if that's the case add their gains into one branch.");
         text.setText(out.toString());
         text.setEditable(false);
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
