@@ -1,4 +1,4 @@
-Signal Flow Graph Solver
+Signal Flow Graph Solver Using Mason's Formula.
 
 Code: src->main->java->games->sfg
 
