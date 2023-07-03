@@ -2,7 +2,6 @@ Signal Flow Graph Solver
 
 Code: src->main->java->games->sfg
 
-<img width="801" alt="Screen Shot 2023-07-03 at 8 55 46 PM" src="https://github.com/Omaressam2002/SFG/assets/132322409/9b813894-edcb-4c1a-bed5-c14bec78ef7e">
 
 This program is a java program, that solves the signal flow graph that you draw on the canvas in the main window and then provides you with the Transfer Function, Loops, Paths of the graph.
 
