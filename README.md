@@ -18,7 +18,6 @@ Add nodes and move them:
 
 
 
-
 <img width="700" alt="Screen Shot 2023-07-03 at 1 49 00 PM" src="https://github.com/Omaressam2002/SFG/assets/132322409/cbb13b33-167b-409f-800a-d7a7f223d3f4">
 
 
